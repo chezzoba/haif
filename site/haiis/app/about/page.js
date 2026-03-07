@@ -79,7 +79,7 @@ export default function About() {
         <h2>Founder</h2>
         <div className={styles['origin-content']}>
           <p>
-            HAIIS is being developed by Kaizad Wadia, a cloud and AI architect with experience in regulated healthcare environments and multicloud implementation. The initiative reflects a broader goal: making practical healthcare AI implementation guidance more accessible across organizations.
+            HAIIS is being developed by Kaizad Wadia, a Cloud and AI architect with experience in regulated healthcare environments and multicloud implementation. The initiative reflects a broader goal: making practical healthcare AI implementation guidance more accessible across organizations.
           </p>
         </div>
       </section>
@@ -109,8 +109,8 @@ export default function About() {
           </div>
 
           <div className={styles['principle-card']}>
-            <h3>Cloud Agnostic</h3>
-            <p>Patterns work across AWS, Azure, GCP, and other platforms with consistent security</p>
+            <h3>Vendor Neutral</h3>
+            <p>Patterns work across clouds and other platforms with consistent security</p>
           </div>
 
           <div className={styles['principle-card']}>

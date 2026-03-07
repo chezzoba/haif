@@ -8,6 +8,7 @@ import styles from './page.module.css';
 export default function Collaborate() {
   const [formData, setFormData] = useState({
     organization: '',
+    email: '',
     role: '',
     useCase: '',
     cloudPlatforms: '',
@@ -42,6 +43,7 @@ export default function Collaborate() {
         setSubmitSuccess(true);
         setFormData({
           organization: '',
+          email: '',
           role: '',
           useCase: '',
           cloudPlatforms: '',
@@ -154,6 +156,21 @@ export default function Collaborate() {
                 onChange={handleChange}
                 required
                 placeholder="Your organization name"
+              />
+            </div>
+
+            <div className={styles['form-group']}>
+              <label htmlFor="email">
+                Email *
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                placeholder="your.email@example.com"
               />
             </div>
 

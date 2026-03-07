@@ -145,6 +145,9 @@ resource "aws_api_gateway_integration" "dynamodb_integration" {
     "organization": {
       "S": "$input.path('$.organization')"
     },
+    "email": {
+      "S": "$input.path('$.email')"
+    },
     "role": {
       "S": "$input.path('$.role')"
     },

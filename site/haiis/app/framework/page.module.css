@@ -255,20 +255,36 @@
     gap: 1rem;
   }
 
+  .evolution-section {
+    padding: 2rem 1rem;
+  }
+
   .timeline {
-    padding-left: 1rem;
+    padding-left: 0;
   }
 
-  .timeline-marker {
-    position: static;
-    margin-bottom: 1rem;
-  }
-
-  .timeline-marker::before {
+  .timeline::before {
     display: none;
   }
 
   .timeline-item {
-    padding-left: 1rem;
+    padding-left: 0;
+    margin-bottom: 2rem;
+  }
+
+  .timeline-year {
+    position: static;
+    width: 100%;
+    margin-bottom: 1rem;
+    height: auto;
+    padding: 0.75rem;
+  }
+
+  .timeline-year::before {
+    display: none;
+  }
+
+  .timeline-content {
+    padding: 1rem;
   }
 }
