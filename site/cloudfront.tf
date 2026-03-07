@@ -13,6 +13,7 @@ resource "aws_cloudfront_function" "url_rewrite" {
 
 # Create a CloudFront distribution
 resource "aws_cloudfront_distribution" "website_distribution" {
+  # S3 origin for static website
   origin {
     domain_name = aws_s3_bucket.static_website_bucket.bucket_regional_domain_name
     origin_id   = "S3-${aws_s3_bucket.static_website_bucket.id}"
@@ -22,9 +23,44 @@ resource "aws_cloudfront_distribution" "website_distribution" {
     }
   }
 
+  # API Gateway origin
+  origin {
+    domain_name = replace(replace(aws_api_gateway_domain_name.api_domain.regional_domain_name, "https:", ""), "/", "")
+    origin_id   = "API-Gateway"
+
+    custom_origin_config {
+      http_port              = 80
+      https_port             = 443
+      origin_protocol_policy = "https-only"
+      origin_ssl_protocols   = ["TLSv1.2"]
+    }
+  }
+
   enabled = true
 
   default_root_object = "index.html"
+
+  # API cache behavior for /api/*
+  ordered_cache_behavior {
+    path_pattern     = "/api/*"
+    allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+    cached_methods   = ["GET", "HEAD", "OPTIONS"]
+    target_origin_id = "API-Gateway"
+
+    forwarded_values {
+      query_string = true
+      headers      = ["Origin", "Access-Control-Request-Headers", "Access-Control-Request-Method", "Host", "Authorization"]
+      cookies {
+        forward = "all"
+      }
+    }
+
+    viewer_protocol_policy = "redirect-to-https"
+    min_ttl                = 0
+    default_ttl            = 0
+    max_ttl                = 0
+    compress               = true
+  }
 
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]

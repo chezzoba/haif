@@ -1,6 +1,6 @@
 # Healthcare AI Implementation Standards (HAIIS)
 
-A comprehensive, cloud-agnostic AI implementation framework for the U.S. healthcare industry, enabling secure, compliant, and scalable adoption of advanced AI technologies across major cloud platforms such as Azure and AWS.
+A comprehensive, vendor-neutral AI implementation framework for the U.S. healthcare industry, enabling secure, compliant, and scalable adoption of advanced AI technologies across major cloud platforms such as Azure and AWS.
 
 ## Overview
 

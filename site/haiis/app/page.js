@@ -11,7 +11,7 @@ export default function Home() {
         <h1>Healthcare AI Implementation Standards</h1>
         <h2>Practical, open-access guidance for secure and compliant healthcare AI implementation</h2>
         <p style={{ marginTop: '1rem', fontSize: '1.1rem', maxWidth: '800px', margin: '1rem auto' }}>
-          A cloud-agnostic framework in development to help healthcare organizations implement AI with stronger compliance, governance, security, and risk management.
+          A vendor-neutral framework in development to help healthcare organizations implement AI with stronger compliance, governance, security, and risk management.
         </p>
         <div className="hero-cta">
           <a href="/collaborate" role="button">Work with us →</a>

@@ -34,8 +34,8 @@ export default function Framework() {
           <div className={styles['principle-item']}>
             <span className={styles.checkmark}>✓</span>
             <div>
-              <h3>Cloud-agnostic</h3>
-              <p>Works across AWS, Azure, GCP, and other cloud platforms</p>
+              <h3>Vendor-Neutral</h3>
+              <p>Built across AWS, Azure, GCP, and other platforms</p>
             </div>
           </div>
           <div className={styles['principle-item']}>
