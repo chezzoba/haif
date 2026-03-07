@@ -1,10 +1,10 @@
 terraform {
   backend "s3" {
-    bucket = "terraform-state-statebucket-2psec0mtnjse"
-    key    = "haiis.tfstate"
-    region = "us-east-1"
+    bucket         = "terraform-state-statebucket-2psec0mtnjse"
+    key            = "haiis.tfstate"
+    region         = "us-east-1"
     dynamodb_table = "terraform-state-lock-table"
-    encrypt = true
+    encrypt        = true
   }
 
   required_providers {
@@ -21,7 +21,7 @@ provider "aws" {
   region = "us-east-1"
 }
 
-variable cloudflare_key {
+variable "cloudflare_key" {
   type = string
 }
 

@@ -6,11 +6,11 @@ resource "aws_s3_bucket" "static_website_bucket" {
 
 # Copy static HTML files to the S3 bucket
 resource "aws_s3_object" "object" {
-  for_each = fileset("./haiis/out/", "**/*")
-  bucket = aws_s3_bucket.static_website_bucket.id
-  key    = each.value
-  source = "./haiis/out/${each.value}"
-  etag   = filemd5("./haiis/out/${each.value}")
+  for_each     = fileset("./haiis/out/", "**/*")
+  bucket       = aws_s3_bucket.static_website_bucket.id
+  key          = each.value
+  source       = "./haiis/out/${each.value}"
+  etag         = filemd5("./haiis/out/${each.value}")
   content_type = lookup(local.mime_types, split(".", each.value)[length(split(".", each.value)) - 1], "application/octet-stream")
 }
 
@@ -26,8 +26,8 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Sid       = "AllowCloudFrontAccess"
-        Effect    = "Allow"
+        Sid    = "AllowCloudFrontAccess"
+        Effect = "Allow"
         Principal = {
           AWS = "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${aws_cloudfront_origin_access_identity.oai.id}"
         }

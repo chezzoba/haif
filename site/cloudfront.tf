@@ -1,10 +1,14 @@
-# Define the CloudFront function
+# Import existing CloudFront function or create new one
 resource "aws_cloudfront_function" "url_rewrite" {
   name    = "url-rewrite"
-  runtime = "cloudfront-js-1.0"
+  runtime = "cloudfront-js-2.0"
   comment = "Add .html to non-API routes"
   publish = true
   code    = file("${path.module}/url_rewrite/function.js")
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Create a CloudFront distribution
@@ -12,7 +16,7 @@ resource "aws_cloudfront_distribution" "website_distribution" {
   origin {
     domain_name = aws_s3_bucket.static_website_bucket.bucket_regional_domain_name
     origin_id   = "S3-${aws_s3_bucket.static_website_bucket.id}"
-    
+
     s3_origin_config {
       origin_access_identity = aws_cloudfront_origin_access_identity.oai.cloudfront_access_identity_path
     }
@@ -36,8 +40,8 @@ resource "aws_cloudfront_distribution" "website_distribution" {
 
     # Attach the CloudFront function to the distribution
     function_association {
-        event_type   = "viewer-request"
-        function_arn = aws_cloudfront_function.url_rewrite.arn
+      event_type   = "viewer-request"
+      function_arn = aws_cloudfront_function.url_rewrite.arn
     }
 
     viewer_protocol_policy = "redirect-to-https"
@@ -47,13 +51,13 @@ resource "aws_cloudfront_distribution" "website_distribution" {
   }
 
   custom_error_response {
-    error_code = 404
-    response_code = 200
+    error_code         = 404
+    response_code      = 200
     response_page_path = "/404.html"
   }
 
   viewer_certificate {
-    acm_certificate_arn = aws_acm_certificate.website_certificate.arn
+    acm_certificate_arn = aws_acm_certificate_validation.website_certificate.certificate_arn
     ssl_support_method  = "sni-only"
   }
 
